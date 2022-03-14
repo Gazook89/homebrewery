@@ -48,7 +48,7 @@ const Snippetbar = createClass({
 		else
 			snippets = SnippetsLegacy.filter((snippetGroup)=>snippetGroup.view === this.props.view);
 
-		return _.map(snippets, (snippetGroup)=>{
+		return <div className='snippets'>{_.map(snippets, (snippetGroup)=>{
 			return <SnippetGroup
 				brew={this.props.brew}
 				groupName={snippetGroup.groupName}
@@ -57,7 +57,9 @@ const Snippetbar = createClass({
 				key={snippetGroup.groupName}
 				onSnippetClick={this.handleSnippetClick}
 			/>;
-		});
+		
+		})}
+		</div>
 	},
 
 	renderEditorButtons : function(){
@@ -91,6 +93,7 @@ const Snippetbar = createClass({
 	render : function(){
 		return <div className='snippetBar'>
 			{this.renderSnippetGroups()}
+			<div className='emptySpace'></div>
 			{this.renderEditorButtons()}
 		</div>;
 	}

@@ -2,16 +2,26 @@
 .snippetBar{
 	@menuHeight      : 25px;
 	position         : relative;
-	height           : @menuHeight;
+	max-height: calc(2 * @menuHeight);
 	background-color : #ddd;
+	display			 : flex;
+	justify-content  : space-between;
+	flex-wrap		 : wrap;
+	.snippets{
+		display: flex;
+		flex-wrap: nowrap;
+		flex: 1 0 auto;
+	}
 	.editors{
-		position        : absolute;
+		flex			: 1;
+		position        : relative;
 		display         : flex;
+		justify-content : flex-end;
 		top             : 0px;
 		right           : 0px;
 		height          : @menuHeight;
 		width           : 125px;
-		justify-content : space-between;
+		justify-content : flex-end;
 		&>div{
 			height      : @menuHeight;
 			width       : @menuHeight;
@@ -89,7 +99,7 @@
 		}
 		.dropdown{
 			position         : absolute;
-			top              : 100%;
+			top              : @menuHeight;
 			visibility       : hidden;
 			z-index          : 1000;
 			margin-left      : -5px;
