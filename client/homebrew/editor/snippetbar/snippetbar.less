@@ -2,17 +2,20 @@
 .snippetBar{
 	@menuHeight      : 25px;
 	position         : relative;
-	height           : @menuHeight;
-	background-color : #ddd;
-	.editors{
-		position        : absolute;
+	background-color : #888;
+	display			 : flex;
+	flex-wrap        : wrap;
+	gap : 1px;
+	.editors, .tools{
+		flex            : 1 0 auto;
+		position        : relative;
 		display         : flex;
 		top             : 0px;
-		right           : 0px;
 		height          : @menuHeight;
-		width           : 125px;
-		justify-content : space-between;
+		justify-content : space-around;
+		background-color: #ddd;
 		&>div{
+			flex:1 0 auto;
 			height      : @menuHeight;
 			width       : @menuHeight;
 			cursor      : pointer;
@@ -22,13 +25,13 @@
 				background-color : #999;
 			}
 			&.text{
-				.tooltipLeft('Brew Editor');
+				.tooltipRight('Brew Editor');
 			}
 			&.style{
-				.tooltipLeft('Style Editor');
+				.tooltipRight('Style Editor');
 			}
 			&.meta{
-				.tooltipLeft('Properties');
+				.tooltipRight('Properties');
 			}
 			&.undo{
 				.tooltipLeft('Undo');
@@ -47,7 +50,7 @@
 				}
 			}
 			&.divider {
-				background: linear-gradient(#000, #000) no-repeat center/1px 100%;
+				background: linear-gradient(#888, #888) no-repeat center/1px 100%;
 				width: 5px;
 				&:hover{
 					background-color: inherit;
@@ -55,57 +58,63 @@
 			}
 		}
 	}
-	.snippetBarButton{
-		height         : @menuHeight;
-		line-height    : @menuHeight;
-		display        : inline-block;
-		padding        : 0px 5px;
-		font-weight    : 800;
-		font-size      : 0.625em;
-		text-transform : uppercase;
-		cursor         : pointer;
-		&:hover, &.selected{
-			background-color : #999;
-		}
-		i{
-			vertical-align : middle;
-			margin-right   : 3px;
-			font-size      : 1.4em;
-		}
-	}
-	.toggleMeta{
-		position     : absolute;
-		top          : 0px;
-		right        : 0px;
-		border-left  : 1px solid black;
-		.tooltipLeft("Edit Brew Properties");
-	}
-	.snippetGroup{
-		border-right   : 1px solid black;
-		&:hover{
-			.dropdown{
-				visibility : visible;
+	.snippets{
+		flex : 10 0 auto;
+		gap  : 1px;
+		background-color: #ddd;
+	
+		.snippetBarButton{
+			height         : @menuHeight;
+			line-height    : @menuHeight;
+			display        : inline-block;
+			padding        : 0px 5px;
+			font-weight    : 800;
+			font-size      : 0.625em;
+			text-transform : uppercase;
+			cursor         : pointer;
+			&:hover, &.selected{
+				background-color : #999;
+			}
+			i{
+				vertical-align : middle;
+				margin-right   : 3px;
+				font-size      : 1.4em;
 			}
 		}
-		.dropdown{
-			position         : absolute;
-			top              : 100%;
-			visibility       : hidden;
-			z-index          : 1000;
-			margin-left      : -5px;
-			padding          : 0px;
-			background-color : #ddd;
-			.snippet{
-				.animate(background-color);
-				padding   : 5px;
-				cursor    : pointer;
-				font-size : 10px;
-				i{
-					margin-right : 8px;
-					font-size    : 1.2em;
+		.toggleMeta{
+			position     : absolute;
+			top          : 0px;
+			right        : 0px;
+			border-left  : 1px solid black;
+			.tooltipLeft("Edit Brew Properties");
+		}
+		.snippetGroup{
+			&:hover{
+				.dropdown{
+					visibility : visible;
 				}
-				&:hover{
-					background-color : #999;
+			}
+			.dropdown{
+				position         : absolute;
+				top              : 100%;
+				visibility       : hidden;
+				z-index          : 1000;
+				margin-left      : -5px;
+				padding          : 0px;
+				background-color : #ddd;
+				.snippet{
+					.animate(background-color);
+					padding     : 5px;
+					cursor      : pointer;
+					font-size   : 10px;
+					white-space : nowrap;
+					i{
+						margin-right : 8px;
+						font-size    : 1.2em;
+					}
+					&:hover{
+						background-color : #999;
+					}
 				}
 			}
 		}

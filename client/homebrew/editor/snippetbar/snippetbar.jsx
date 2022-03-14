@@ -48,31 +48,24 @@ const Snippetbar = createClass({
 		else
 			snippets = SnippetsLegacy.filter((snippetGroup)=>snippetGroup.view === this.props.view);
 
-		return _.map(snippets, (snippetGroup)=>{
-			return <SnippetGroup
-				brew={this.props.brew}
-				groupName={snippetGroup.groupName}
-				icon={snippetGroup.icon}
-				snippets={snippetGroup.snippets}
-				key={snippetGroup.groupName}
-				onSnippetClick={this.handleSnippetClick}
-			/>;
-		});
+		return <div className='snippets'>{
+			_.map(snippets, (snippetGroup)=>{
+				return <SnippetGroup
+					brew={this.props.brew}
+					groupName={snippetGroup.groupName}
+					icon={snippetGroup.icon}
+					snippets={snippetGroup.snippets}
+					key={snippetGroup.groupName}
+					onSnippetClick={this.handleSnippetClick}
+				/>;
+			})}
+		</div>
 	},
 
 	renderEditorButtons : function(){
 		if(!this.props.showEditButtons) return;
 
 		return <div className='editors'>
-			<div className={`editorTool undo ${this.props.historySize.undo ? 'active' : ''}`}
-				onClick={this.props.undo} >
-				<i className='fas fa-undo' />
-			</div>
-			<div className={`editorTool redo ${this.props.historySize.redo ? 'active' : ''}`}
-				onClick={this.props.redo} >
-				<i className='fas fa-redo' />
-			</div>
-			<div className='divider'></div>
 			<div className={cx('text', { selected: this.props.view === 'text' })}
 				 onClick={()=>this.props.onViewChange('text')}>
 				<i className='fa fa-beer' />
@@ -88,10 +81,27 @@ const Snippetbar = createClass({
 		</div>;
 	},
 
+	renderToolButtons : function(){
+		if(!this.props.showEditButtons) return;
+
+		return <div className='tools'>
+			<div className={`editorTool undo ${this.props.historySize.undo ? 'active' : ''}`}
+				onClick={this.props.undo} >
+				<i className='fas fa-undo' />
+			</div>
+			<div className={`editorTool redo ${this.props.historySize.redo ? 'active' : ''}`}
+				onClick={this.props.redo} >
+				<i className='fas fa-redo' />
+			</div>
+		</div>
+
+	},
+
 	render : function(){
 		return <div className='snippetBar'>
-			{this.renderSnippetGroups()}
 			{this.renderEditorButtons()}
+			{this.renderToolButtons()}
+			{this.renderSnippetGroups()}
 		</div>;
 	}
 });
