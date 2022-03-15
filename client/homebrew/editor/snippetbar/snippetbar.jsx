@@ -93,7 +93,6 @@ const Snippetbar = createClass({
 	render : function(){
 		return <div className='snippetBar'>
 			{this.renderSnippetGroups()}
-			<div className='emptySpace'></div>
 			{this.renderEditorButtons()}
 		</div>;
 	}
