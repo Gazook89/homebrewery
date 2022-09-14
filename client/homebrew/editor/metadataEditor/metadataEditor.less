@@ -9,7 +9,6 @@
 	background-color : #999;
 	.field{
 		display       : flex;
-		width         : 100%;
 		margin-bottom : 10px;
 		&>label{
 			display        : inline-block;
@@ -23,7 +22,6 @@
 		}
 		&>.value{
 			flex           : 1 1 auto;
-			min-width      : 200px;
 		}
 		&.thumbnail{
 			height      : 1.4em;
@@ -43,15 +41,17 @@
 					background-color: #777;
 				}
 			}
-			.thumbnail-preview{
-				position    : relative;
-				width       : 80px;
-				height      : min-content;
-				border      : 2px solid white;
-				margin-left : 5px;
-				max-height  : 115px;
-			}
 		}
+	}
+
+	.thumbnail-preview{
+		position    : relative;
+		float 		: right;
+		width       : 100px;
+		height      : min-content;
+		border      : 2px solid white;
+		margin-left : 5px;
+		max-height  : 115px;
 	}
 	.description.field textarea.value{
 		resize      : none;

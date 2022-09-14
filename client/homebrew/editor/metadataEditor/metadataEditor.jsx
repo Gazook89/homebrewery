@@ -231,6 +231,8 @@ const MetadataEditor = createClass({
 					value={this.props.metadata.title}
 					onChange={(e)=>this.handleFieldChange('title', e)} />
 			</div>
+
+			{this.renderThumbnail()}
 			<div className='field description'>
 				<label>description</label>
 				<textarea value={this.props.metadata.description} className='value'
@@ -246,7 +248,6 @@ const MetadataEditor = createClass({
 				<button className='display' onClick={this.toggleThumbnailDisplay}>
 					<i className={`fas fa-caret-${this.state.showThumbnail ? 'right' : 'left'}`} />
 				</button>
-				{this.renderThumbnail()}
 			</div>
 
 			<StringArrayEditor label='tags' valuePatterns={[/^(?:(?:group|meta|system|type):)?[A-Za-z0-9][A-Za-z0-9 \/.\-]{0,40}$/]}
