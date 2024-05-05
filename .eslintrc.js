@@ -1,18 +1,22 @@
 module.exports = {
-	root          : true,
-	parserOptions : {
+    root          : true,
+
+    parserOptions : {
 		ecmaVersion  : 2021,
 		sourceType   : 'module',
 		ecmaFeatures : {
 			jsx : true
 		}
 	},
-	env : {
+
+    env : {
 		browser : true,
 		node    : true
 	},
-	plugins : ['react', 'jest'],
-	rules   : {
+
+    plugins : ['react', 'jest'],
+
+    rules   : {
 		/** Errors **/
 		'camelcase'              : ['error', { properties: 'never' }],
 		//'func-style'             : ['error', 'expression', { allowArrowFunctions: true }],
@@ -75,5 +79,7 @@ module.exports = {
 		'react/jsx-indent-props'        : ['warn', 'tab'],
 		'space-in-parens'               : ['warn', 'never'],
 		'template-curly-spacing'        : ['warn', 'never'],
-	}
+	},
+
+    extends: ['plugin:storybook/recommended']
 };

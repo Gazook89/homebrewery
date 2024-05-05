@@ -14,3 +14,5 @@ startMViewer.bat
 .vscode
 
 coverage
+
+*storybook.log

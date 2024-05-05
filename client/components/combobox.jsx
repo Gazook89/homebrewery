@@ -1,10 +1,16 @@
-const React = require('react');
-const createClass = require('create-react-class');
-const _ = require('lodash');
-const cx = require('classnames');
-require('./combobox.less');
+// const React = require('react');
+// const createClass = require('create-react-class');
+// const _ = require('lodash');
+// const cx = require('classnames');
+// require('./combobox.less');
 
-const Combobox = createClass({
+import React from 'react';
+import createClass from 'create-react-class';
+import _ from 'lodash';
+import cx from 'classnames';
+import './combobox.less';
+
+export const Combobox = createClass({
 	displayName     : 'Combobox',
 	getDefaultProps : function() {
 		return {
@@ -126,4 +132,4 @@ const Combobox = createClass({
 	}
 });
 
-module.exports = Combobox;
+// module.exports = Combobox;
