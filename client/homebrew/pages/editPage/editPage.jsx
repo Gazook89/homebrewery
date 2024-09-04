@@ -424,7 +424,6 @@ const EditPage = createClass({
 						lang={this.state.brew.lang}
 						currentEditorPage={this.state.currentEditorPage}
 						allowPrint={true}
-						showHeaderNav={true}
 					/>
 				</SplitPane>
 			</div>
