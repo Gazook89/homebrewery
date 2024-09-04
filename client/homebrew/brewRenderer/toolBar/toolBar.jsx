@@ -1,17 +1,21 @@
 require('./toolBar.less');
 const React = require('react');
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 const _ = require('lodash');
+
+import HeaderNav from '../headerNav/headerNav.jsx';
 
 
 const MAX_ZOOM = 300;
 const MIN_ZOOM = 10;
 
-const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages })=>{
+const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages, pages })=>{
 
 	const [zoomLevel, setZoomLevel] = useState(100);
 	const [pageNum, setPageNum]     = useState(currentPage);
 	const [toolsVisible, setToolsVisible] = useState(true);
+
+
 
 	useEffect(()=>{
 		onZoomChange(zoomLevel);
@@ -70,6 +74,7 @@ const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages })=>{
 	return (		
 		<div className={`toolBar ${toolsVisible ? 'visible' : 'hidden'}`}>
 			<button class='toggleButton' title={`${toolsVisible ? 'Hide' : 'Show'} Preview Toolbar`} onClick={()=>{setToolsVisible(!toolsVisible)}}><i className='fas fa-glasses' /></button>
+			<HeaderNav ref={pages} />
 			{/*v=====----------------------< Zoom Controls >---------------------=====v*/}
 			<div className='group'>
 				<button

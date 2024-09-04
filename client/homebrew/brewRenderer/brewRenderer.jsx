@@ -16,7 +16,6 @@ const Frame = require('react-frame-component').default;
 const dedent = require('dedent-tabs').default;
 const { printCurrentBrew } = require('../../../shared/helpers.js');
 
-import HeaderNav from './headerNav/headerNav.jsx';
 
 const DOMPurify = require('dompurify');
 const purifyConfig = { FORCE_BODY: true, SANITIZE_DOM: false };
@@ -58,7 +57,6 @@ const BrewRenderer = (props)=>{
 		lang              : '',
 		errors            : [],
 		currentEditorPage : 0,
-		showHeaderNav     : false,
 		themeBundle       : {},
 		...props
 	};
@@ -70,6 +68,7 @@ const BrewRenderer = (props)=>{
 		visibility         : 'hidden',
 		zoom               : 100,
 		currentPageNumber  : 1,
+		headerNavVisible   : false
 	});
 
 	const mainRef  = useRef(null);
@@ -210,7 +209,7 @@ const BrewRenderer = (props)=>{
 				<NotificationPopup />
 			</div>
 
-			<ToolBar onZoomChange={handleZoom} currentPage={state.currentPageNumber}  totalPages={rawPages.length}/>
+			<ToolBar onZoomChange={handleZoom} currentPage={state.currentPageNumber}  totalPages={rawPages.length} pages={pagesRef} />
 
 			{/*render in iFrame so broken code doesn't crash the site.*/}
 			<Frame id='BrewRenderer' initialContent={INITIAL_CONTENT}
@@ -235,7 +234,6 @@ const BrewRenderer = (props)=>{
 						</>
 					}
 				</div>
-				{props.showHeaderNav ? <HeaderNav ref={pagesRef} /> : <></>}
 			</Frame>
 		</>
 	);

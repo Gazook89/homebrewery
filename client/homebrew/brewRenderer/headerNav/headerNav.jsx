@@ -54,14 +54,14 @@ const HeaderNav = React.forwardRef(({}, pagesRef)=>{
 
 	};
 
-	return <div className={`headerNav ${state.showHeaderNav ? 'active' : ''}`}>
+	return <button className={`headerNav ${state.showHeaderNav ? 'active' : ''}`}>
 		<i
 			className={`navIcon ${state.showHeaderNav ? 'active fa-solid' : 'fa-regular'} fa-rectangle-list`}
 			onClick={toggleHeaderNav}
 			title='Navigate by Header'
 		></i>
 		{state.showHeaderNav && renderHeaderLinks()}
-	</div>;
+	</button>;
 }
 );
 
