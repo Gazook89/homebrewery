@@ -3,8 +3,6 @@ const React = require('react');
 const { useState, useEffect, useRef } = React;
 const _ = require('lodash');
 
-
-
 const MAX_ZOOM = 300;
 const MIN_ZOOM = 10;
 
@@ -13,8 +11,6 @@ const ToolBar = ({ onZoomChange, currentPage, totalPages, onNavToggle })=>{
 	const [zoomLevel, setZoomLevel] = useState(100);
 	const [pageNum, setPageNum]     = useState(currentPage);
 	const [toolsVisible, setToolsVisible] = useState(true);
-
-
 	const [navVisible, setNavVisible] = useState(false);
 
 	useEffect(()=>{
@@ -42,7 +38,6 @@ const ToolBar = ({ onZoomChange, currentPage, totalPages, onNavToggle })=>{
 		page?.scrollIntoView({ block: 'start' });
 		setPageNum(pageNumber);
 	};
-
 
 	const calculateChange = (mode)=>{
 		const iframe = document.getElementById('BrewRenderer');
