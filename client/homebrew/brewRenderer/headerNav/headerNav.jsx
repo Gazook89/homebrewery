@@ -54,11 +54,11 @@ const HeaderNav = React.forwardRef(({}, pagesRef)=>{
 });
 
 const HeaderNavItem = ({ link, text, depth, className })=>{
-	return <li>
+	return (<li>
 		<a href={`#${link}`} target='_self' className={className}>
 			{`${'-'.repeat(depth)}${text}`}
 		</a>
-	</li>;
+	</li>)
 };
 
 export default HeaderNav;
