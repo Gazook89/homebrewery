@@ -192,6 +192,13 @@ const BrewRenderer = (props)=>{
 		}));
 	};
 
+	const handleHeaderNav = ()=>{
+		setState((prevState)=>({
+			...prevState,
+			headerNavVisible : !state.headerNavVisible
+		}));
+	};
+
 	return (
 		<>
 			{/*render dummy page while iFrame is mounting.*/}
@@ -209,7 +216,6 @@ const BrewRenderer = (props)=>{
 				<NotificationPopup />
 			</div>
 
-			<ToolBar onZoomChange={handleZoom} currentPage={state.currentPageNumber}  totalPages={rawPages.length} pages={pagesRef} />
 
 			{/*render in iFrame so broken code doesn't crash the site.*/}
 			<Frame id='BrewRenderer' initialContent={INITIAL_CONTENT}
@@ -235,6 +241,7 @@ const BrewRenderer = (props)=>{
 					}
 				</div>
 			</Frame>
+			<ToolBar onNavToggle={handleHeaderNav} onZoomChange={handleZoom} currentPage={state.currentPageNumber}  totalPages={rawPages.length} pages={pagesRef}  />
 		</>
 	);
 };
