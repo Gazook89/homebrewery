@@ -29,7 +29,13 @@
 	}
 }
 
-.pane { position : relative; }
+.pane, .content { 
+	position : relative;
+	.row {
+		display: flex;
+		height: 100%;
+	}
+}
 
 
 @media print {
