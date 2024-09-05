@@ -1,7 +1,7 @@
 @import (less) './client/icons/customIcons.less';
 
 .toolBar {
-	position         : absolute;
+	position         : relative;
 	z-index          : 1;
 	box-sizing       : border-box;
 	display          : flex;
@@ -27,6 +27,14 @@
 		align-items      : center;
 		justify-content  : center;
 		height           : 28px;
+		&.start {
+			justify-content: start;
+			flex: 1 1 auto;
+		}
+		&.end {
+			justify-content: end;
+			flex: 1 1 auto;
+		}
 	}
 
 	.tool {
@@ -106,13 +114,16 @@
 	}
 
 	&.hidden {
-		width: 32px;
+		position:absolute;
+		width: 33px;
 		transition: all .3s ease;
 		flex-wrap:nowrap;
 		overflow: hidden;
 		background-color: unset;
 		opacity: .5;
-		& > *:not(.toggleButton) {
+		justify-content: start;
+		box-sizing: border-box;
+		& > *:not(.start) {
 			opacity: 0;
 			transition: all .2s ease;
 		}
@@ -121,8 +132,6 @@
 
 button.toggleButton {
 	z-index : 5;
-	position:absolute;
-	left: 0;
 	width: 32px;
 	min-width: unset;
 }

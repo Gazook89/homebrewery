@@ -3,19 +3,19 @@ const React = require('react');
 const { useState, useEffect, useRef } = React;
 const _ = require('lodash');
 
-import HeaderNav from '../headerNav/headerNav.jsx';
 
 
 const MAX_ZOOM = 300;
 const MIN_ZOOM = 10;
 
-const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages, pages })=>{
+const ToolBar = ({ onZoomChange, currentPage, totalPages, onNavToggle })=>{
 
 	const [zoomLevel, setZoomLevel] = useState(100);
 	const [pageNum, setPageNum]     = useState(currentPage);
 	const [toolsVisible, setToolsVisible] = useState(true);
 
 
+	const [navVisible, setNavVisible] = useState(false);
 
 	useEffect(()=>{
 		onZoomChange(zoomLevel);
@@ -73,8 +73,9 @@ const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages, pages })
 
 	return (		
 		<div className={`toolBar ${toolsVisible ? 'visible' : 'hidden'}`}>
-			<button class='toggleButton' title={`${toolsVisible ? 'Hide' : 'Show'} Preview Toolbar`} onClick={()=>{setToolsVisible(!toolsVisible)}}><i className='fas fa-glasses' /></button>
-			<HeaderNav ref={pages} />
+			<div className='group start'>
+				<button className='toggleButton' title={`${toolsVisible ? 'Hide' : 'Show'} Preview Toolbar`} onClick={()=>{setToolsVisible(!toolsVisible)}}><i className='fas fa-glasses' /></button>
+			</div>
 			{/*v=====----------------------< Zoom Controls >---------------------=====v*/}
 			<div className='group'>
 				<button
@@ -160,6 +161,13 @@ const ToolBar = ({ onZoomChange, currentPage, onPageChange, totalPages, pages })
 					disabled={pageNum >= totalPages}
 				>
 					<i className='fas fa-arrow-right'></i>
+				</button>
+			</div>
+			<div className='group end'>
+				<button className={`tool ${navVisible ? 'active' : ''}`} title='Navigate by Header' onClick={()=>{onNavToggle(); setNavVisible(!navVisible)}}>
+					<i
+						className={`${navVisible ? 'active fa-solid' : 'fa-regular'} fa-rectangle-list`}
+					></i>
 				</button>
 			</div>
 		</div>
