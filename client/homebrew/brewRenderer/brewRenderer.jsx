@@ -216,32 +216,39 @@ const BrewRenderer = (props)=>{
 				<NotificationPopup />
 			</div>
 
-
-			{/*render in iFrame so broken code doesn't crash the site.*/}
-			<Frame id='BrewRenderer' initialContent={INITIAL_CONTENT}
-				style={{ width: '100%', height: '100%', visibility: state.visibility }}
-				contentDidMount={frameDidMount}
-				onClick={()=>{emitClick();}}
-			>
-				<div className={'brewRenderer'}
-					onScroll={getCurrentPage}
-					onKeyDown={handleControlKeys}
-					tabIndex={-1}
-					style={{ height: state.height }}>
-
-					{/* Apply CSS from Style tab and render pages from Markdown tab */}
-					{state.isMounted
-						&&
-						<>
-							{renderStyle()}
-							<div className='pages' lang={`${props.lang || 'en'}`} ref={pagesRef} style={{ zoom: `${state.zoom}%` }}>
-								{renderPages()}
-							</div>
-						</>
-					}
-				</div>
-			</Frame>
 			<ToolBar onNavToggle={handleHeaderNav} onZoomChange={handleZoom} currentPage={state.currentPageNumber}  totalPages={rawPages.length} pages={pagesRef}  />
+
+			<div className='row'>
+
+
+				{/*render in iFrame so broken code doesn't crash the site.*/}
+				<Frame id='BrewRenderer' initialContent={INITIAL_CONTENT}
+					style={{ width: '100%', height: '100%', visibility: state.visibility }}
+					contentDidMount={frameDidMount}
+					onClick={()=>{emitClick();}}
+				>
+					<div className={'brewRenderer'}
+						onScroll={getCurrentPage}
+						onKeyDown={handleControlKeys}
+						tabIndex={-1}
+						style={{ height: state.height }}>
+
+						{/* Apply CSS from Style tab and render pages from Markdown tab */}
+						{state.isMounted
+							&&
+							<>
+								{renderStyle()}
+								<div className='pages' lang={`${props.lang || 'en'}`} ref={pagesRef} style={{ zoom: `${state.zoom}%` }}>
+									{renderPages()}
+								</div>
+							</>
+						}
+					</div>
+				</Frame>
+
+
+				{state.headerNavVisible ? <HeaderNav ref={pagesRef} /> : null }
+			</div>
 		</>
 	);
 };
