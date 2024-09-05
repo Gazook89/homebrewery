@@ -8,6 +8,7 @@ const MarkdownLegacy = require('naturalcrit/markdownLegacy.js');
 const Markdown = require('naturalcrit/markdown.js');
 const ErrorBar = require('./errorBar/errorBar.jsx');
 const ToolBar  = require('./toolBar/toolBar.jsx');
+import HeaderNav from './headerNav/headerNav.jsx';
 
 //TODO: move to the brew renderer
 const RenderWarnings = require('homebrewery/renderWarnings/renderWarnings.jsx');
