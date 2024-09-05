@@ -6,16 +6,6 @@ import * as _ from 'lodash';
 
 const HeaderNav = React.forwardRef(({}, pagesRef)=>{
 
-	const [state, setState] = React.useState({
-		showHeaderNav : false
-	});
-
-	const toggleHeaderNav = ()=>{
-		setState((prevState)=>({
-			...prevState,
-			showHeaderNav : !prevState.showHeaderNav
-		}));
-	};
 
 	const renderHeaderLinks = ()=>{
 		if(!pagesRef.current) return;
@@ -54,16 +44,14 @@ const HeaderNav = React.forwardRef(({}, pagesRef)=>{
 
 	};
 
-	return <button className={`headerNav ${state.showHeaderNav ? 'active' : ''}`}>
-		<i
-			className={`navIcon ${state.showHeaderNav ? 'active fa-solid' : 'fa-regular'} fa-rectangle-list`}
-			onClick={toggleHeaderNav}
-			title='Navigate by Header'
-		></i>
-		{state.showHeaderNav && renderHeaderLinks()}
-	</button>;
-}
-);
+	return (
+		<div className='header-nav'>
+			<ul>
+				{renderHeaderLinks()}
+			</ul>
+		</div>
+	);
+});
 
 const HeaderNavItem = ({ link, text, depth, className })=>{
 	return <li>
