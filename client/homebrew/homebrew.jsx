@@ -65,7 +65,7 @@ const Homebrew = createClass({
 	render : function (){
 		return (
 			<Router location={this.props.url}>
-				<div className='homebrew'>
+				<div className='homebrew' onclick="void(0);">
 					<Routes>
 						<Route path='/edit/:id' element={<WithRoute el={EditPage} brew={this.props.brew} userThemes={this.props.userThemes}/>} />
 						<Route path='/share/:id' element={<WithRoute el={SharePage} brew={this.props.brew} />} />
