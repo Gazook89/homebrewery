@@ -1,0 +1,175 @@
+@import (less) './themes/fonts/Fantasy/fonts.less';
+
+
+.mirror(){
+	left: 0;
+	transform:scaleX(-1);
+}
+
+
+
+.page {
+	--header_font: 'Lack';
+	--body_font: 'De Aetna';
+	--page_background_texture: url(/assets/Fantasy/Old_Paper_1000w.webp);
+	--frame_bg_color: #F5F0DC;
+
+	background-image: var(--page_background_texture);
+	background-size: cover;
+	font-family: var(--body_font);
+	font-size: 13px;
+	line-height: 1.2;
+	font-variant-ligatures: common-ligatures;
+	padding: 0.75in 0.75in 1in;
+	column-gap: 0.33in;
+
+	// Footer
+	&::after {
+		content:'';
+		position: absolute;
+		bottom:-20px;
+		left:0;
+		width: 100%;
+		height: 150px;
+		background-image: url(/assets/Fantasy/colorful_footer_1000w.webp);
+		background-size: cover;
+		background-position: center bottom;
+		transform:unset;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: -20px;
+		width: 100%;
+		background-image: url(/assets/Fantasy/footer_bars.svg);
+		background-size: cover;
+		background-position: center bottom;
+		z-index: 5;
+		height: 110px;
+		transform: unset;
+		right: 0;
+	}
+
+
+
+	.pageNumber {
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+		&::before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background: white;
+			z-index: -1;
+			border-radius: 50%;
+			filter: blur(10px);
+		}
+
+	}
+
+	// Apply the odd and even styles
+	&:nth-child(odd) {
+		&::after, &::before {
+			.mirror();
+		}
+		& .pageNumber {
+			left: 38px;
+			right: unset;
+		}
+	}
+
+	&:nth-child(even) .pageNumber {
+		right: 38px;
+		left: unset;
+	}
+
+
+
+
+
+	h1,h2,h3,h4,h5 {
+		--line-height: 1.2em;
+		margin-top: var(--line-height);
+		line-height: var(--line-height);
+		font-family: var(--header_font);
+	}
+
+	p + p {
+		margin-top: 1em;
+	}
+
+	div.frame {
+		width: calc(100% + .32cm);
+		padding: 6px 8px 10px;
+		margin: 25px -0.16cm 15px;
+		background-color: var(--frame_bg_color);
+		background-blend-mode: overlay;
+		/* border image properties */
+		border-image: url('/assets/Fantasy/note_frame_1000w.webp');
+		border-image-slice: 49 14 10 14;
+		border-image-width: 21px 9px 6px 9px;
+		border-image-outset: 20px 8px 6px 8px;
+		border-image-repeat: round; 
+		border-style: solid;
+		/* font settings */
+		font-family: sans-serif;
+		font-weight: 100;
+		font-size: .9em;
+		line-height: 1.3;
+	}
+
+	.decor {
+		position:absolute;
+		height: 500px;
+		width: 500px;
+		object-fit: contain;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index:-1;
+		&.spatter1{ background-image: url(/assets/Fantasy/image_decorations/spatter_1.webp) }
+		&.spatter2{ background-image: url(/assets/Fantasy/image_decorations/spatter_2.webp) }
+		&.spatter3{ background-image: url(/assets/Fantasy/image_decorations/spatter_3.webp) }
+	}
+
+	img {
+		position: relative;
+		z-index: 5;
+	}
+
+	img.frame {
+		--HB_src: url(https://s-media-cache-ak0.pinimg.com/736x/4a/81/79/4a8179462cfdf39054a418efd4cb743e.jpg);
+		width: 325px;
+		mix-blend-mode: unset;
+		border: 4px ridge #f6da69;
+		box-shadow: 0px 4px 13px -5px #463d3d, 0px 4px 13px -5px #463d3d inset;
+		&[cover=true]{
+			object-fit: cover;
+			object-position: center center;
+		}
+	}
+
+	/* TABLES */
+	table {
+		margin: 10px 0;
+		font-family: Lack;
+		font-size: 10px;
+		thead, tbody tr:nth-child(even) {
+			background-color: #FFEC9999;
+		}
+		tbody tr td:first-child:not(:has(em)) {
+			padding-left: 3ch;
+		}
+		th, td {
+			padding: 3px 6px;
+			border-right: 1px solid currentColor;
+		}
+	}
+}
