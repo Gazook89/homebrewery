@@ -28,13 +28,17 @@ const TagInput = ({ unique = true, values = [], ...props }) => {
 
 	const handleInputKeyDown = ({ evt, value, index = valueContext.length, options = {} }) => {
 		if (_.includes(['Enter', ','], evt.key)) {
+			// if pressed in new tag input, add tag
 			if (!valueContext[index]) {
 				submitTag(evt.target.value, null, null, evt);
+			// if pressed in existing tag with open input, update tag
 			} else if (valueContext[index].editing === true) {
 				submitTag(evt.target.value, value, index, evt);
+			// if pressed in existing tag not open, open/edit tag
 			} else if (evt.key === 'Enter' && valueContext[index].editing === false) {
 				editTag(index);
 			}
+			// clear input after submission if option is set
 			if (options.clear) {
 				setTemporaryValue('');
 			}
