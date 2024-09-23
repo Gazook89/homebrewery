@@ -27,7 +27,13 @@ const TagInput = ({ unique = true, values = [], ...props }) => {
 	};
 
 	const handleInputKeyDown = ({ evt, value, index = valueContext.length, options = {} }) => {
+		if(evt.target.validity?.valid === false){
+			evt.target.setCustomValidity('');     // refresh validity of input on keypress
+		}
 		if (_.includes(['Enter', ','], evt.key)) {
+			// Validate
+			if(!validated(evt.target.value, evt)){ return };
+
 			// if pressed in new tag input, add tag
 			if (!valueContext[index]) {
 				submitTag(evt.target.value, null, null, evt);
@@ -66,11 +72,24 @@ const TagInput = ({ unique = true, values = [], ...props }) => {
 		setFocusedIndex(index);
 	};
 
+	const validated = (newValue, evt)=>{
+		const inputRules = props.validators ?? [];
+		let validationErr = [];
+		validationErr = inputRules.map((rule)=>rule(newValue)).filter(Boolean);
+
+		if(validationErr.length > 0){
+			const errMessage = validationErr.map((err)=>{ return `- ${err}`}).join('\n');
+			evt.target.setCustomValidity(errMessage);
+			evt.target.reportValidity();
+			return false
+		} else { return true }
+	}
+
 	const submitTag = (newValue, originalValue, index, evt) => {
 		evt.preventDefault();
 		setValueContext((prevContext) => {
 			// Remove tag
-			if (newValue === null) {
+			if (newValue === null || newValue === '') {
 				return [...prevContext].filter((context, i) => i !== index);
 			}
 			// Add tag
@@ -85,7 +104,8 @@ const TagInput = ({ unique = true, values = [], ...props }) => {
 				return context;
 			});
 		});
-	};
+		
+	}
 
 	const editTag = (index) => {
 		setValueContext((prevContext) => {
