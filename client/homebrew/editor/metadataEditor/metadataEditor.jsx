@@ -341,7 +341,6 @@ const MetadataEditor = createClass({
 				{this.renderThumbnail()}
 			</div>
 
-			<TagInput label='tags' valuePatterns={[/^(?:(?:group|meta|system|type):)?[A-Za-z0-9][A-Za-z0-9 \/.\-]{0,40}$/]}
 				placeholder='add tag' unique={true}
 				values={this.props.metadata.tags}
 				onChange={(e)=>this.handleFieldChange('tags', e)}
@@ -364,7 +363,6 @@ const MetadataEditor = createClass({
 
 			{this.renderAuthors()}
 
-			<TagInput label='invited authors' valuePatterns={[/.+/]}
 				validators={[(v)=>!this.props.metadata.authors?.includes(v)]}
 				placeholder='invite author' unique={true}
 				values={this.props.metadata.invitedAuthors}
