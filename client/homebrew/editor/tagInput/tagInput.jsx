@@ -3,7 +3,7 @@ const React = require('react');
 const { useState, useEffect, useRef } = React;
 const _ = require('lodash');
 
-const TagInput = ({ unique = true, values = [], ...props }) => {
+const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 	const [temporaryValue, setTemporaryValue] = useState('');
 	const [focusedIndex, setFocusedIndex] = useState(-1);
 	const [valueContext, setValueContext] = useState(values.map((value) => ({ value, editing: false })));
@@ -76,6 +76,14 @@ const TagInput = ({ unique = true, values = [], ...props }) => {
 		const inputRules = props.validators ?? [];
 		let validationErr = [];
 		validationErr = inputRules.map((rule)=>rule(newValue)).filter(Boolean);
+
+		// check if unique.  if false, add to list of validation errors.
+		if(requireUnique === true){
+			const unique = !valueContext.some((context)=>context.value === newValue);
+			if(!unique){
+				validationErr.push('Must be unique.')
+			};
+		}
 
 		if(validationErr.length > 0){
 			const errMessage = validationErr.map((err)=>{ return `- ${err}`}).join('\n');
