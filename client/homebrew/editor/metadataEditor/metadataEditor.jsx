@@ -62,7 +62,7 @@ const MetadataEditor = createClass({
 		return <img className='thumbnail-preview' src={this.props.metadata.thumbnail || homebreweryThumbnail}></img>;
 	},
 
-	handleFieldChange : function(name, e, options){
+	handleFieldChange : function(name, e, options = {}){
 		// load validation rules, and check input value against them
 		const inputRules = validations[name] ?? [];
 		const validationErr = inputRules.map((rule)=>rule(e.target.value)).filter(Boolean);
