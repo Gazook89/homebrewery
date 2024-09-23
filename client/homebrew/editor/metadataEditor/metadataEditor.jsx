@@ -62,13 +62,13 @@ const MetadataEditor = createClass({
 		return <img className='thumbnail-preview' src={this.props.metadata.thumbnail || homebreweryThumbnail}></img>;
 	},
 
-	handleFieldChange : function(name, e){
+	handleFieldChange : function(name, e, options){
 		// load validation rules, and check input value against them
 		const inputRules = validations[name] ?? [];
 		const validationErr = inputRules.map((rule)=>rule(e.target.value)).filter(Boolean);
 
 		// if no validation rules, save to props
-		if(validationErr.length === 0){
+		if(options.skipValidation || validationErr.length === 0){
 			callIfExists(e.target, 'setCustomValidity', '');
 			this.props.onChange({
 				...this.props.metadata,
@@ -341,9 +341,12 @@ const MetadataEditor = createClass({
 				{this.renderThumbnail()}
 			</div>
 
+			<TagInput label='tags'
+				key='tags-input'
 				placeholder='add tag' unique={true}
+				validators={validations.tags}
 				values={this.props.metadata.tags}
-				onChange={(e)=>this.handleFieldChange('tags', e)}
+				onChange={(e)=>this.handleFieldChange('tags', e, {skipValidation: true})}
 				/>
 
 			<div className='field systems'>
@@ -363,11 +366,13 @@ const MetadataEditor = createClass({
 
 			{this.renderAuthors()}
 
-				validators={[(v)=>!this.props.metadata.authors?.includes(v)]}
+			<TagInput label='invited authors'
+				key='author-input'
+				validators={validations.authors}
 				placeholder='invite author' unique={true}
 				values={this.props.metadata.invitedAuthors}
 				notes={['Invited author usernames are case sensitive.', 'After adding an invited author, send them the edit link. There, they can choose to accept or decline the invitation.']}
-				onChange={(e)=>this.handleFieldChange('invitedAuthors', e)}
+				onChange={(e)=>this.handleFieldChange('invitedAuthors', e, {skipValidation: true})}
 				/>
 
 			<h2>Privacy</h2>
