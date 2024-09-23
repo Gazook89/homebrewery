@@ -343,7 +343,7 @@ const MetadataEditor = createClass({
 
 			<TagInput label='tags'
 				key='tags-input'
-				placeholder='add tag' unique={true}
+				placeholder='add tag'
 				validators={validations.tags}
 				values={this.props.metadata.tags}
 				onChange={(e)=>this.handleFieldChange('tags', e, {skipValidation: true})}
@@ -369,7 +369,7 @@ const MetadataEditor = createClass({
 			<TagInput label='invited authors'
 				key='author-input'
 				validators={validations.authors}
-				placeholder='invite author' unique={true}
+				placeholder='invite author'
 				values={this.props.metadata.invitedAuthors}
 				notes={['Invited author usernames are case sensitive.', 'After adding an invited author, send them the edit link. There, they can choose to accept or decline the invitation.']}
 				onChange={(e)=>this.handleFieldChange('invitedAuthors', e, {skipValidation: true})}
