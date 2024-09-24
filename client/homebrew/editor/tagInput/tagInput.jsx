@@ -4,21 +4,21 @@ const { useState, useEffect, useRef } = React;
 const _ = require('lodash');
 
 const TagInput = ({ requireUnique = true, values = [], ...props }) => {
-	const [temporaryValue, setTemporaryValue] = useState('');
+	const [tempInputValue, setTempInputValue] = useState('');
 	const [focusedIndex, setFocusedIndex] = useState(-1);
-	const [valueContext, setValueContext] = useState(values.map((value) => ({ value, editing: false })));
+	const [tagList, setTagList] = useState(values.map((value) => ({ value, editing: false })));
 	const tagRefs = useRef([]);
 
 	useEffect(() => {
-		handleChange(valueContext.map((context) => context.value));
-		tagRefs.current = tagRefs.current.slice(0, valueContext.length);
-	}, [valueContext]);
+		handleChange(tagList.map((context) => context.value));
+		tagRefs.current = tagRefs.current.slice(0, tagList.length);
+	}, [tagList]);
 
 	useEffect(() => {
 		if (focusedIndex >= 0 && focusedIndex < tagRefs.current.length) {
 			tagRefs.current[focusedIndex]?.focus();
 		}
-	}, [valueContext, focusedIndex]);
+	}, [tagList, focusedIndex]);
 
 	const handleChange = (value) => {
 		props.onChange({
@@ -26,7 +26,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 		});
 	};
 
-	const handleInputKeyDown = ({ evt, value, index = valueContext.length, options = {} }) => {
+	const handleInputKeyDown = ({ evt, value, index = tagList.length, options = {} }) => {
 		if(evt.target.validity?.valid === false){
 			evt.target.setCustomValidity('');     // refresh validity of input on keypress
 		}
@@ -35,20 +35,20 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 			if(!validated(evt.target.value, evt)){ return };
 
 			// if pressed in new tag input, add tag
-			if (!valueContext[index]) {
+			if (!tagList[index]) {
 				submitTag(evt.target.value, null, null, evt);
 			// if pressed in existing tag with open input, update tag
-			} else if (valueContext[index].editing === true) {
+			} else if (tagList[index].editing === true) {
 				submitTag(evt.target.value, value, index, evt);
 			// if pressed in existing tag not open, open/edit tag
-			} else if (evt.key === 'Enter' && valueContext[index].editing === false) {
+			} else if (evt.key === 'Enter' && tagList[index].editing === false) {
 				editTag(index);
 			}
 			// clear input after submission if option is set
 			if (options.clear) {
-				setTemporaryValue('');
+				setTempInputValue('');
 			}
-		} else if (evt.key === ' ' && valueContext[index].editing === false) {
+		} else if (evt.key === ' ' && tagList[index].editing === false) {
 			evt.preventDefault();
 			editTag(index);
 		} else if (evt.key === 'Escape') {
@@ -63,7 +63,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 	};
 
 	const setFocus = (index, evt) => {
-		if (index < 0 || index >= valueContext.length) {
+		if (index < 0 || index >= tagList.length) {
 			setFocusedIndex(-1);
 			evt.target.blur();
 			return;
@@ -79,7 +79,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 
 		// check if unique.  if false, add to list of validation errors.
 		if(requireUnique === true){
-			const unique = !valueContext.some((context)=>context.value === newValue);
+			const unique = !tagList.some((context)=>context.value === newValue);
 			if(!unique){
 				validationErr.push('Must be unique.')
 			};
@@ -95,7 +95,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 
 	const submitTag = (newValue, originalValue, index, evt) => {
 		evt.preventDefault();
-		setValueContext((prevContext) => {
+		setTagList((prevContext) => {
 			// Remove tag
 			if (newValue === null || newValue === '') {
 				return [...prevContext].filter((context, i) => i !== index);
@@ -116,7 +116,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 	}
 
 	const editTag = (index) => {
-		setValueContext((prevContext) => {
+		setTagList((prevContext) => {
 			return prevContext.map((context, i) => {
 				if (i === index) {
 					return { ...context, editing: true };
@@ -171,7 +171,7 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 			<label>{props.label}</label>
 			<div className='value'>
 				<ul className='list'>
-					{valueContext.map((context, index) => {
+					{tagList.map((context, index) => {
 						return context.editing ? renderWriteTag(context, index) : renderReadTag(context, index);
 					})}
 				</ul>
@@ -180,8 +180,8 @@ const TagInput = ({ requireUnique = true, values = [], ...props }) => {
 					type='text'
 					className='value'
 					placeholder={props.placeholder}
-					value={temporaryValue}
-					onChange={(e) => setTemporaryValue(e.target.value)}
+					value={tempInputValue}
+					onChange={(e) => setTempInputValue(e.target.value)}
 					onKeyDown={(evt) => handleInputKeyDown({ evt, value: null, options: { clear: true } })}
 				/>
 			</div>
