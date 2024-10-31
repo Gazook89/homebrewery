@@ -65,9 +65,7 @@ const BrewRenderer = (props)=>{
 
 	const [state, setState] = useState({
 		isMounted     : false,
-		visibility    : 'hidden',
-		zoom          : 100,
-		previewStyles : {}
+		visibility    : 'hidden'
 	});
 
 	const [displayOptions, setDisplayOptions] = useState({
