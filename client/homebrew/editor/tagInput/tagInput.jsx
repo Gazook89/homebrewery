@@ -64,8 +64,10 @@ const TagInput = ({ requireUnique = true, values = [], ...props })=>{
 
 	const setFocus = (index, evt)=>{
 		if(index < 0 || index >= tagList.length) {
-			setFocusedIndex(-1);
-			evt.target.blur();
+			if(evt.key === 'Tab'){
+				setFocusedIndex(-1);
+				evt.target.blur();
+			}
 			return;
 		}
 		evt.preventDefault();
