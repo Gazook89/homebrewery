@@ -168,7 +168,7 @@ const RecentItems = createClass({
 	},
 
 	render : function(){
-		return <MenuDropdown id='recentsMenu' className='recent' color='purple'  caret={true} groupName={this.props.text} >
+		return <MenuDropdown id='recentsMenu' className='recent' color='purple'  caret={true} groupName={this.props.text} dir='right' >
 			{this.renderDropdown()}
 		</MenuDropdown>;
 	}

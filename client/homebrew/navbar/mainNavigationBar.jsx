@@ -80,6 +80,11 @@ const MainNavigationBar = ({ brew, alerts, setAutoSaveWarning, trySave, unsavedT
 							</MenuItem>
 						}
 						<MenuRule />
+						<MenuDropdown id='sourceMenu' className='source' color='yellow'  caret={true} groupName='source' icon='fa-solid fa-code'>
+							<MenuItem color='yellow' >View</MenuItem>
+							<MenuItem color='yellow'>Download</MenuItem>
+						</MenuDropdown>
+						<MenuRule />
 						<PrintNavItem />
 					</>}
 				</MenuDropdown>

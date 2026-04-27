@@ -56,6 +56,11 @@ const NewBrew = ({...props})=>{
 				<input id='uploadTxt' className='newFromLocal' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
                 from file
 			</MenuItem>
+			<MenuItem
+				color="green"
+				icon='fa-solid fa-copy'>
+					from current
+				</MenuItem>
 		</MenuDropdown>
 	);
 };
