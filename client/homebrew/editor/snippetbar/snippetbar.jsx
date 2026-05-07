@@ -9,18 +9,18 @@ import cx from 'classnames';
 import { loadHistory } from '../../utils/versionHistory.js';
 import { brewSnippetsToJSON } from '@shared/helpers.js';
 
-import legacy5ePHBSnippets from '@themes/Legacy/5ePHB/snippets.js';
-import v35ePHBSnippets from '@themes/V3/5ePHB/snippets.js';
-import v35eDMGSnippets from '@themes/V3/5eDMG/snippets.js';
-import v3JournalSnippets from '@themes/V3/Journal/snippets.js';
-import v3BlankSnippets from '@themes/V3/Blank/snippets.js';
+import legacy5ePHBSnippets from '@themes/legacy/5ePHB/snippets.js';
+import v35ePHBSnippets from '@themes/v3/5ePHB/snippets.js';
+import v35eDMGSnippets from '@themes/v3/5eDMG/snippets.js';
+import v3JournalSnippets from '@themes/v3/journal/snippets.js';
+import v3BlankSnippets from '@themes/v3/blank/snippets.js';
 
 const ThemeSnippets = {
 	Legacy_5ePHB : legacy5ePHBSnippets,
 	V3_5ePHB     : v35ePHBSnippets,
 	V3_5eDMG     : v35eDMGSnippets,
-	V3_Journal   : v3JournalSnippets,
-	V3_Blank     : v3BlankSnippets,
+	V3_journal   : v3JournalSnippets,
+	V3_blank     : v3BlankSnippets,
 };
 
 import defaultCM5Theme from '@themes/codeMirror/default.js';
