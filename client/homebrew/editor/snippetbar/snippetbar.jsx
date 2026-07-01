@@ -275,7 +275,7 @@ const Snippetbar = createReactClass({
 					</button>
 					<button className={`editorTheme`}
 						onClick={this.toggleThemeSelector}
-						disabled={!this.state.themeSelector}>
+						disabled={!this.props.updateEditorTheme}>
 						<i className='fas fa-palette' />
 						{this.state.themeSelector && this.renderThemeSelector()}
 					</button>
