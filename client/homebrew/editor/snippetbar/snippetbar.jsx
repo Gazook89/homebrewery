@@ -245,34 +245,34 @@ const Snippetbar = createReactClass({
 		return (
 			<div className='editors'>
 				{this.props.view !== 'meta' && <><div className='historyTools'>
-					<div className={`editorTool snippetGroup history ${this.state.historyExists ? 'active' : ''}`}
+					<button className={`editorTool snippetGroup history ${this.state.historyExists ? 'active' : ''}`}
 						onClick={this.toggleHistoryMenu} >
 						<i className='fas fa-clock-rotate-left' />
 						{ this.state.showHistory && this.renderHistoryItems() }
-					</div>
-					<div className={`editorTool undo ${this.props.historySize.done ? 'active' : ''}`}
+					</button>
+					<button className={`editorTool undo ${this.props.historySize.done ? 'active' : ''}`}
 						onClick={this.props.undo} >
 						<i className='fas fa-undo' />
-					</div>
-					<div className={`editorTool redo ${this.props.historySize.undone ? 'active' : ''}`}
+					</button>
+					<button className={`editorTool redo ${this.props.historySize.undone ? 'active' : ''}`}
 						onClick={this.props.redo} >
 						<i className='fas fa-redo' />
-					</div>
+					</button>
 				</div>
 				<div className='codeTools'>
-					<div className={`editorTool foldAll ${this.props.foldCode ? 'active' : ''}`}
+					<button className={`editorTool foldAll ${this.props.foldCode ? 'active' : ''}`}
 						onClick={this.props.foldCode} >
 						<i className='fas fa-compress-alt' />
-					</div>
-					<div className={`editorTool unfoldAll ${this.props.unfoldCode ? 'active' : ''}`}
+					</button>
+					<button className={`editorTool unfoldAll ${this.props.unfoldCode ? 'active' : ''}`}
 						onClick={this.props.unfoldCode} >
 						<i className='fas fa-expand-alt' />
-					</div>
-					<div className={`editorTheme ${this.state.themeSelector ? 'active' : ''}`}
+					</button>
+					<button className={`editorTheme ${this.state.themeSelector ? 'active' : ''}`}
 						onClick={this.toggleThemeSelector} >
 						<i className='fas fa-palette' />
 						{this.state.themeSelector && this.renderThemeSelector()}
-					</div>
+					</button>
 				</div></>}
 
 				<div className='tabs'>
