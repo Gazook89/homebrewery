@@ -245,31 +245,37 @@ const Snippetbar = createReactClass({
 		return (
 			<div className='editors'>
 				{this.props.view !== 'meta' && <><div className='historyTools'>
-					<button className={`editorTool snippetGroup history ${this.state.historyExists ? 'active' : ''}`}
-						onClick={this.toggleHistoryMenu} >
+					<button className={`editorTool snippetGroup history`}
+						onClick={this.toggleHistoryMenu}
+						disabled={!this.state.historyExists}>
 						<i className='fas fa-clock-rotate-left' />
 						{ this.state.showHistory && this.renderHistoryItems() }
 					</button>
-					<button className={`editorTool undo ${this.props.historySize.done ? 'active' : ''}`}
-						onClick={this.props.undo} >
+					<button className={`editorTool undo`}
+						onClick={this.props.undo}
+						disabled={!this.props.historySize?.done}>
 						<i className='fas fa-undo' />
 					</button>
-					<button className={`editorTool redo ${this.props.historySize.undone ? 'active' : ''}`}
-						onClick={this.props.redo} >
+					<button className={`editorTool redo`}
+						onClick={this.props.redo}
+						disabled={!this.props.historySize?.undone}>
 						<i className='fas fa-redo' />
 					</button>
 				</div>
 				<div className='codeTools'>
-					<button className={`editorTool foldAll ${this.props.foldCode ? 'active' : ''}`}
-						onClick={this.props.foldCode} >
+					<button className={`editorTool foldAll`}
+						onClick={this.props.foldCode}
+						disabled={!this.props.foldCode}>
 						<i className='fas fa-compress-alt' />
 					</button>
-					<button className={`editorTool unfoldAll ${this.props.unfoldCode ? 'active' : ''}`}
-						onClick={this.props.unfoldCode} >
+					<button className={`editorTool unfoldAll`}
+						onClick={this.props.unfoldCode}
+						disabled={!this.props.unfoldCode}>
 						<i className='fas fa-expand-alt' />
 					</button>
-					<button className={`editorTheme ${this.state.themeSelector ? 'active' : ''}`}
-						onClick={this.toggleThemeSelector} >
+					<button className={`editorTheme`}
+						onClick={this.toggleThemeSelector}
+						disabled={!this.state.themeSelector}>
 						<i className='fas fa-palette' />
 						{this.state.themeSelector && this.renderThemeSelector()}
 					</button>
