@@ -32,7 +32,7 @@
 
 			&:first-child { border-left : none; }
 
-			& > div {
+			& > button {
 				position    : relative;
 				width       : @menuHeight;
 				height      : @menuHeight;
@@ -40,7 +40,10 @@
 				text-align  : center;
 				cursor      : pointer;
 
-				&.editorTool:not(.active) { cursor : not-allowed; }
+				&.editorTool:disabled {
+					cursor : not-allowed;
+					color: gray;
+				}
 
 				&:hover,&.selected { background-color : #999999; }
 				&.text {
@@ -58,34 +61,23 @@
 				&.undo {
 					.tooltipLeft('Undo');
 					font-size : 0.75em;
-					color     : grey;
-					&.active { color : inherit; }
 				}
 				&.redo {
 					.tooltipLeft('Redo');
 					font-size : 0.75em;
-					color     : grey;
-					&.active { color : inherit; }
 				}
 				&.foldAll {
 					.tooltipLeft('Fold All');
 					font-size : 0.75em;
-					color     : grey;
-					&.active { color : inherit; }
 				}
 				&.unfoldAll {
 					.tooltipLeft('Unfold All');
 					font-size : 0.75em;
-					color     : grey;
-					&.active { color : inherit; }
 				}
 				&.history {
 					.tooltipLeft('History');
 					position  : relative;
 					font-size : 0.75em;
-					color     : grey;
-					border    : none;
-					&.active { color : inherit; }
 					& > .dropdown {
 						right : -1px;
 						& > .snippet { padding-right : 10px; }
@@ -95,10 +87,6 @@
 					.tooltipLeft('Editor Themes');
 					font-size : 0.75em;
 					color     : inherit;
-					&.active {
-						position         : relative;
-						background-color : #999999;
-					}
 				}
 				&.divider {
 					width      : 5px;
