@@ -25,74 +25,46 @@
 
 		&:only-child {min-width   : unset; margin-left : auto;}
 
-		>div {
+		> div {
 			display         : flex;
 			flex            : 1;
 			justify-content : space-around;
+			font-size       : 0.625em;
 
-			&:first-child { border-left : none; }
-
-			& > button, & > div {
+			& .tool, & > div:is(.tabs > div, .toolMenu) {
 				position    : relative;
+				display     : grid;
+				place-items : center;
 				width       : @menuHeight;
 				height      : @menuHeight;
 				line-height : @menuHeight;
 				text-align  : center;
 				cursor      : pointer;
 
-				&.editorTool:disabled {
+				i {
+					font-size      : 1.4em;
+					text-box-trim  : trim-both;
+				}
+
+				&:disabled {
+					color  : gray;
 					cursor : not-allowed;
-					color: gray;
 				}
 
 				&:hover,&.selected { background-color : #999999; }
-				&.text {
-					.tooltipLeft('Brew Editor');
-				}
-				&.style {
-					.tooltipLeft('Style Editor');
-				}
-				&.meta {
-					.tooltipLeft('Properties');
-				}
-				&.snippet {
-					.tooltipLeft('Snippets');
-				}
-				&.undo {
-					.tooltipLeft('Undo');
-					font-size : 0.75em;
-				}
-				&.redo {
-					.tooltipLeft('Redo');
-					font-size : 0.75em;
-				}
-				&.foldAll {
-					.tooltipLeft('Fold All');
-					font-size : 0.75em;
-				}
-				&.unfoldAll {
-					.tooltipLeft('Unfold All');
-					font-size : 0.75em;
-				}
-				&.history {
-					.tooltipLeft('History');
-					position  : relative;
-					font-size : 0.75em;
-					& > .dropdown {
-						right : -1px;
-						& > .snippet { padding-right : 10px; }
-					}
-				}
-				&.editorTheme {
-					.tooltipLeft('Editor Themes');
-					font-size : 0.75em;
-					color     : inherit;
-				}
-				&.divider {
-					width      : 5px;
-					background : linear-gradient(currentColor, currentColor) no-repeat center/1px 100%;
-					&:hover { background-color : inherit; }
-				}
+				
+				&.text { .tooltipLeft('Brew Editor'); }
+				&.style { .tooltipLeft('Style Editor'); }
+				&.meta { .tooltipLeft('Properties'); }
+				&.snippet { .tooltipLeft('Snippets'); }
+				&#undo { .tooltipLeft('Undo'); }
+				&#redo { .tooltipLeft('Redo'); }
+				&#foldAll { .tooltipLeft('Fold All'); }
+				&#unfoldAll { .tooltipLeft('Unfold All'); }
+				&#editorTheme {.tooltipLeft('Editor Themes');}
+				&#history { .tooltipLeft('History'); }
+				&:is(#historyTools .toolMenu) .dropdown { right : 0; }
+
 			}
 			.themeSelector {
 				position         : absolute;
@@ -219,10 +191,10 @@
 		}
 	}
 	.disabledSnippets {
-		color: grey;
-		cursor: not-allowed;
+		color  : grey;
+		cursor : not-allowed;
 
-		&:hover { background-color: #DDDDDD;}
+		&:hover { background-color : #DDDDDD;}
 	}
 
 }
