@@ -244,36 +244,38 @@ const Snippetbar = createReactClass({
 
 		return (
 			<div className='editors'>
-				{this.props.view !== 'meta' && <><div className='historyTools'>
-					<button className={`editorTool snippetGroup history`}
-						onClick={this.toggleHistoryMenu}
-						disabled={!this.state.historyExists}>
-						<i className='fas fa-clock-rotate-left' />
-						{ this.state.showHistory && this.renderHistoryItems() }
-					</button>
-					<button className={`editorTool undo`}
+				{this.props.view !== 'meta' && <><div id='historyTools' className='toolGroup'>
+					<div className='toolMenu snippetGroup'>
+						<button id='history' className='tool'
+							onClick={this.toggleHistoryMenu}
+							disabled={!this.state.historyExists}>
+							<i className='fas fa-clock-rotate-left' />
+						</button>
+						{this.state.showHistory && this.renderHistoryItems()}
+					</div>
+					<button id='undo' className='tool'
 						onClick={this.props.undo}
 						disabled={!this.props.historySize?.done}>
 						<i className='fas fa-undo' />
 					</button>
-					<button className={`editorTool redo`}
+					<button id='redo' className='tool'
 						onClick={this.props.redo}
 						disabled={!this.props.historySize?.undone}>
 						<i className='fas fa-redo' />
 					</button>
 				</div>
-				<div className='codeTools'>
-					<button className={`editorTool foldAll`}
+				<div id='codeTools' className='toolGroup'>
+					<button id='foldAll' className='tool'
 						onClick={this.props.foldCode}
 						disabled={!this.props.foldCode}>
 						<i className='fas fa-compress-alt' />
 					</button>
-					<button className={`editorTool unfoldAll`}
+					<button id='unfoldAll' className='tool'
 						onClick={this.props.unfoldCode}
 						disabled={!this.props.unfoldCode}>
 						<i className='fas fa-expand-alt' />
 					</button>
-					<button className={`editorTheme`}
+					<button id='editorTheme' className='tool'
 						onClick={this.toggleThemeSelector}
 						disabled={!this.props.updateEditorTheme}>
 						<i className='fas fa-palette' />
