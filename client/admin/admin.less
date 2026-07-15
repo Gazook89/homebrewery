@@ -1,5 +1,5 @@
 @import '@sharedStyles/reset.less';
-@import '@sharedStyles/elements.less';
+@import './elements.less';
 @import '@sharedStyles/animations.less';
 @import '@sharedStyles/colors.less';
 @import '@sharedStyles/tooltip.less';
@@ -18,6 +18,12 @@ body {
 	color            : #4B5055;
 	background-color : #EEEEEE;
 	text-rendering   : optimizeLegibility;
+}
+
+.container {
+	position      : relative;
+	max-width     : @containerWidth;
+	margin        : 0 auto;
 }
 
 :where(.admin) {
