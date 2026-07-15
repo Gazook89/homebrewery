@@ -30,9 +30,9 @@ const Stats = createReactClass({
 			<h2> Stats </h2>
 			<dl>
 				<dt>Total Brew Count</dt>
-				<dd>{this.state.stats.totalBrews}</dd>
+				<dd>{this.state.stats?.totalBrews || 'none'}</dd>
 				<dt>Total Brews Published</dt>
-				<dd>{this.state.stats.totalPublishedBrews}</dd>
+				<dd>{this.state.stats?.totalPublishedBrews || 'none'}</dd>
 			</dl>
 
 			{this.state.fetching
